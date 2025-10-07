@@ -1,0 +1,25 @@
+# Arquivos e pastas do Ambiente Virtual
+venv/
+/venv/
+*.venv
+
+# Arquivos de configuração do PyCharm
+.idea/
+
+# Arquivos compilados do Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Arquivos de dependências (se gerados localmente)
+/dist/
+/build/
+*.egg-info/
+
+# Arquivos de log
+*.log
+
+# Arquivos de sistema operacional
+.DS_Store
+Thumbs.db
