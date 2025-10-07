@@ -41,7 +41,7 @@ Para rodar este projeto na sua máquina local, siga os passos abaixo.
 
 1.  **Clone o repositório:**
     ```bash
-    git clone [https://github.com/joaogabrielsl-dev/leitor-usuarios-flask.git](https://github.com/joaogabrielsl-dev/leitor-usuarios-flask.git)
+    git clone https://github.com/joaogabrielsl-dev/leitor-usuarios-flask.git
     ```
 
 2.  **Navegue até a pasta do projeto:**
