@@ -10,5 +10,9 @@
   {
     "Nome": "Mariana Costa",
     "Email": "mariana.costa@example.com"
+  },
+  {
+    "Nome": "João Lima",
+    "Email": "joao.lima@example.com"
   }
 ]
