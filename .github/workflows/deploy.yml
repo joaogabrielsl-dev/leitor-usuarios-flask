@@ -1,0 +1,51 @@
+# Nome do seu workflow, que aparecerá na aba "Actions" do GitHub
+name: Deploy Python App to Azure App Service
+
+# Define o "gatilho" (trigger): este workflow roda quando houver push na branch 'main'
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+# Define as variáveis de ambiente que usaremos no job
+env:
+  AZURE_WEBAPP_NAME: 'leitor-usuarios-flask-joaogabriellima'
+  PYTHON_VERSION: '3.13'
+
+# Define os "jobs" (tarefas) que o workflow irá executar
+jobs:
+  build-and-deploy:
+    # A máquina virtual que o GitHub usará para rodar os passos
+    runs-on: ubuntu-latest
+
+    # Os passos sequenciais do job
+    steps:
+    # 1. Baixa o código do seu repositório para a máquina virtual
+    - name: 'Checkout Github Action'
+      uses: actions/checkout@v3
+
+    # 2. Configura a versão do Python especificada
+    - name: 'Set up Python version'
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+
+    # 3. Instala as dependências do projeto a partir do requirements.txt
+    - name: 'Install dependencies'
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    # 4. Faz o login no Azure de forma segura usando o "secret" que criamos
+    - name: 'Azure Login'
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    # 5. Publica (deploy) a aplicação no Azure App Service
+    - name: 'Deploy to Azure Web App'
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        package: '.' # '.' significa a pasta atual, onde o código está
